@@ -1,2 +1,1 @@
-# Calculator
-scientific calculator 
+kidcalc =[]

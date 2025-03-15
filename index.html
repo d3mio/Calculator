@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MathMagic - Interactive Kids Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <header>
+            <div class="logo">
+                <span class="logo-text">Math</span><span class="logo-highlight">Magic</span>
+                <div class="sparkle">✨</div>
+            </div>
+            <div class="theme-toggle">
+                <button id="toggle-theme">🌙 / ☀️</button>
+            </div>
+        </header>
+
+        <div class="tabs">
+            <button class="tab-button active" data-tab="calculator">Calculator</button>
+            <button class="tab-button" data-tab="number-practice">Number Practice</button>
+            <button class="tab-button" data-tab="counting-game">Counting Game</button>
+        </div>
+
+        <div class="tab-content active" id="calculator">
+            <div class="calculator-container">
+                <div class="problem-statement">
+                    <div class="problem-text">Let's solve:</div>
+                    <div id="problem-display"></div>
+                </div>
+
+                <div class="display-container">
+                    <div id="first-number" class="number-display">5</div>
+                    <div id="operation" class="operation-display">+</div>
+                    <div id="second-number" class="number-display">3</div>
+                    <div class="equals">=</div>
+                    <div id="result" class="result-display">?</div>
+                </div>
+
+                <div class="visual-aids">
+                    <div class="visual-container">
+                        <div class="visual-label">First number</div>
+                        <div id="first-number-objects" class="objects-container"></div>
+                    </div>
+                    <div class="visual-operation">
+                        <span id="visual-operation-symbol">+</span>
+                    </div>
+                    <div class="visual-container">
+                        <div class="visual-label">Second number</div>
+                        <div id="second-number-objects" class="objects-container"></div>
+                    </div>
+                </div>
+
+                <div class="result-container">
+                    <div class="visual-label">Result</div>
+                    <div id="result-objects" class="result-objects-container"></div>
+                </div>
+
+                <div class="calculator-controls">
+                    <div class="number-pad">
+                        <button class="number-button" data-number="1">1</button>
+                        <button class="number-button" data-number="2">2</button>
+                        <button class="number-button" data-number="3">3</button>
+                        <button class="number-button" data-number="4">4</button>
+                        <button class="number-button" data-number="5">5</button>
+                        <button class="number-button" data-number="6">6</button>
+                        <button class="number-button" data-number="7">7</button>
+                        <button class="number-button" data-number="8">8</button>
+                        <button class="number-button" data-number="9">9</button>
+                        <button class="number-button zero" data-number="0">0</button>
+                    </div>
+
+                    <div class="operations">
+                        <button id="add" class="operation-button">➕</button>
+                        <button id="subtract" class="operation-button">➖</button>
+                        <button id="multiply" class="operation-button">✖️</button>
+                        <button id="calculate" class="calculate-button">Check Answer</button>
+                        <button id="clear" class="clear-button">Start Over</button>
+                    </div>
+                </div>
+
+                <div class="feedback-container" id="feedback-message">
+                    <div class="feedback-icon">🎉</div>
+                    <div class="feedback-text">Great job!</div>
+                </div>
+            </div>
+
+            <div class="animal-selector">
+                <p>Choose your counting friend:</p>
+                <div class="animals">
+                    <button class="animal-button" data-animal="🐱">🐱</button>
+                    <button class="animal-button" data-animal="🐶">🐶</button>
+                    <button class="animal-button" data-animal="🐰">🐰</button>
+                    <button class="animal-button" data-animal="🐢">🐢</button>
+                    <button class="animal-button" data-animal="🐻">🐻</button>
+                    <button class="animal-button" data-animal="🦊">🦊</button>
+                    <button class="animal-button" data-animal="🦄">🦄</button>
+                    <button class="animal-button" data-animal="🐼">🐼</button>
+                </div>
+            </div>
+
+            <div class="progress-tracker">
+                <div class="progress-label">Your progress:</div>
+                <div class="progress-stars">
+                    <span class="star filled">⭐</span>
+                    <span class="star filled">⭐</span>
+                    <span class="star">⭐</span>
+                    <span class="star">⭐</span>
+                    <span class="star">⭐</span>
+                </div>
+                <div class="progress-message">Keep going! You're doing great!</div>
+            </div>
+        </div>
+
+        <div class="tab-content" id="number-practice">
+            <div class="practice-container">
+                <h2>Number Practice</h2>
+                <div class="number-display-practice">
+                    <div class="big-number" id="practice-number">5</div>
+                </div>
+                <div class="number-name" id="number-word">five</div>
+                <div class="visual-representation" id="number-visual"></div>
+                <div class="practice-controls">
+                    <button id="prev-number">⬅️ Previous</button>
+                    <button id="hear-number">🔊 Hear it</button>
+                    <button id="next-number">Next ➡️</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-content" id="counting-game">
+            <div class="game-container">
+                <h2>Counting Game</h2>
+                <div class="game-instructions">Count how many objects you see!</div>
+                <div class="game-area" id="game-objects-area"></div>
+                <div class="game-input">
+                    <label for="count-guess">How many?</label>
+                    <input type="number" id="count-guess" min="1" max="20">
+                    <button id="check-guess">Check</button>
+                </div>
+                <div class="game-feedback" id="game-feedback"></div>
+                <button id="new-game">New Game</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="achievement-badge" id="achievements-button">
+            <span>🏆</span>
+            <span>Achievements</span>
+        </div>
+        <div class="settings-button" id="settings-button">⚙️ Settings</div>
+    </footer>
+
+    <!-- Modal for achievements -->
+    <div class="modal" id="achievements-modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Your Achievements</h2>
+            <div class="achievements-list">
+                <div class="achievement">
+                    <div class="achievement-icon">🏅</div>
+                    <div class="achievement-details">
+                        <div class="achievement-title">First Calculation</div>
+                        <div class="achievement-description">Completed your first math problem</div>
+                    </div>
+                </div>
+                <div class="achievement">
+                    <div class="achievement-icon">🥈</div>
+                    <div class="achievement-details">
+                        <div class="achievement-title">Number Explorer</div>
+                        <div class="achievement-description">Learned all numbers from 1 to 10</div>
+                    </div>
+                </div>
+                <div class="achievement locked">
+                    <div class="achievement-icon">?</div>
+                    <div class="achievement-details">
+                        <div class="achievement-title">Math Wizard</div>
+                        <div class="achievement-description">Complete 10 calculations correctly</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for settings -->
+    <div class="modal" id="settings-modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Settings</h2>
+            <div class="settings-options">
+                <div class="setting">
+                    <label for="sound-toggle">Sound Effects</label>
+                    <label class="switch">
+                        <input type="checkbox" id="sound-toggle" checked>
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+                <div class="setting">
+                    <label for="animation-toggle">Animations</label>
+                    <label class="switch">
+                        <input type="checkbox" id="animation-toggle" checked>
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+                <div class="setting">
+                    <label for="difficulty">Difficulty</label>
+                    <select id="difficulty">
+                        <option value="easy">Easy (Numbers 1-10)</option>
+                        <option value="medium">Medium (Numbers 1-20)</option>
+                        <option value="hard">Hard (Numbers 1-30)</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
