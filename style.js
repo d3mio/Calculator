@@ -458,3 +458,75 @@ document.querySelectorAll('.close-modal').forEach(button => {
         setTimeout(() => modal.style.display = 'none', 400);
     });
 });
+
+// Enhanced achievement system
+function unlockAchievement(title) {
+    const achievements = document.querySelectorAll('.achievement');
+    achievements.forEach(achievement => {
+        if (achievement.querySelector('.achievement-title').textContent === title) {
+            // Remove locked class and add unlocked class
+            achievement.classList.remove('locked');
+            achievement.classList.add('unlocked');
+            
+            // Create celebration particles behind the achievement
+            createCelebrationEffect(achievement);
+            
+            // Show achievement notification
+            const notification = document.createElement('div');
+            notification.className = 'achievement-notification';
+            notification.innerHTML = `
+                <div class="notification-icon">🏆</div>
+                <div class="notification-text">
+                    <div>Achievement Unlocked!</div>
+                    <div>${title}</div>
+                </div>
+            `;
+            document.body.appendChild(notification);
+            
+            // Apply show class after a small delay for transition effect
+            setTimeout(() => {
+                notification.classList.add('show');
+                
+                // Play sound if enabled
+                if (document.getElementById('sound-toggle').checked) {
+                    playAchievementSound();
+                }
+                
+                // Remove notification after delay
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                    setTimeout(() => notification.remove(), 500);
+                }, 4000);
+            }, 100);
+        }
+    });
+}
+
+// Create celebration particles effect
+function createCelebrationEffect(element) {
+    // Only create effect if animations are enabled
+    if (!document.getElementById('animation-toggle').checked) return;
+    
+    const colors = ['#FF9933', '#6A5ACD', '#FFD700', '#FF6347'];
+    
+    for (let i = 0; i < 30; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'celebration-particle';
+        particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+        particle.style.left = `${50 + (Math.random() * 50 - 25)}%`;
+        particle.style.top = `${50 + (Math.random() * 50 - 25)}%`;
+        particle.style.setProperty('--angle', `${Math.random() * 360}deg`);
+        particle.style.setProperty('--distance', `${Math.random() * 80 + 20}px`);
+        element.appendChild(particle);
+        
+        // Remove particle after animation completes
+        setTimeout(() => particle.remove(), 1000);
+    }
+}
+
+// Play achievement sound
+function playAchievementSound() {
+    const sound = new Audio();
+    sound.src = 'data:audio/mp3;base64,SUQzBAAAAAABEVRYWFgAAAAtAAADY29tbWVudABCaWdTb3VuZEJhbmsuY29tIC8gTGFTb25vdGhlcXVlLm9yZwBURU5DAAAAHQAAA0VuZ2luZWVyAFRoZSBBdWRpbyBXaXphcmQAVElUMgAAABgAAANXYXJuaW5nIFRvbmUAV2l6YXJkMQBUU1NFAAAADwAAAkxhdmY1Ny44My4xMDAAAAAAAAAAAAAAAP/7kMAAAAAAAAAAAAAAAAAAAAAAAEluZm8AAAAPAAAAFgAAG2QAGBsbHh4hISQkJycoKCsrLi4xMTQ0Nzc6Oj09QEBDSEhLS05OU1NWUFFUV1haWl1dYGBjZmZpaWxsb3Jyf39/f359enp3d3R0cXFubmtramdeXltbWFhVVVJSTk5LS0ZGPz86OjY2MjIvLysrKCgkJCEhHh4bGxgYFRUSEg8PDAAAAAAAAAAAAAAAAP/7kMQAAAAAAAAAAAAAAAAAAAAAAGluZm8AAAAPAAAAFgAAG2QAGBcXGxseHiEhJCQnJygpKyssLC8vMjI1NTg4Ozs+PkFBRENGRklJTExPT1JSVVVYWFtbXl5hYWRkaWlsbG9vc3J1dXh4e3t+foGBhISDg4GBf398fHl5dnZzc3BwbW1qamVlYmJfX1xcWVlWVlNTTk5LS0hIRUVCQj8/PDw5OTY2MzMwMC0tKiooKCUlIiIeHhsbFxcUFBERDg4AAAAAAAAAAAAAAP/7kMQAAAAAAAAAAAAAAAAAAAAAAExBTUUzLjk5LjVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/7kMQAAAAAAAAAAAAAAAAAAAAAAFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV';
+    sound.play();
+}

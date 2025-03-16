@@ -990,3 +990,119 @@ footer {
         box-shadow: 0 0 15px 5px rgba(var(--primary-color-rgb), 0.8);
     }
 }
+
+/* Achievement notification styling */
+.achievement-notification {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    display: flex;
+    align-items: center;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    padding: 16px 24px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    transform: translateX(120%);
+    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.achievement-notification.show {
+    transform: translateX(0);
+}
+
+.notification-icon {
+    font-size: 36px;
+    margin-right: 16px;
+    animation: bounce 1s infinite alternate;
+}
+
+@keyframes bounce {
+    from { transform: scale(1) rotate(0deg); }
+    to { transform: scale(1.2) rotate(10deg); }
+}
+
+.notification-text {
+    font-weight: bold;
+}
+
+.notification-text div:first-child {
+    font-size: 14px;
+    opacity: 0.9;
+}
+
+.notification-text div:last-child {
+    font-size: 22px;
+}
+
+/* Enhanced achievement unlock animation */
+.achievement.unlocked {
+    animation: achievementUnlock 1.2s ease-out, glowPulse 2s infinite alternate;
+    border: 2px solid var(--secondary-color);
+    transform: scale(1.05);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 240, 230, 0.9));
+}
+
+@keyframes achievementUnlock {
+    0% { transform: scale(1); }
+    10% { transform: scale(1.1); }
+    20% { transform: scale(1); }
+    30% { transform: scale(1.08); }
+    40% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1.05); }
+}
+
+@keyframes glowPulse {
+    from { box-shadow: 0 0 8px rgba(var(--secondary-color), 0.6); }
+    to { box-shadow: 0 0 20px 5px rgba(var(--secondary-color), 0.8); }
+}
+
+/* Celebration confetti effect for achievement icon */
+.achievement.unlocked .achievement-icon {
+    animation: iconCelebrate 1.5s infinite alternate;
+    background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+    color: white;
+}
+
+@keyframes iconCelebrate {
+    0% { transform: scale(1) rotate(0deg); }
+    50% { transform: scale(1.15) rotate(5deg); }
+    100% { transform: scale(1.1) rotate(-5deg); }
+}
+
+/* Text animation for unlocked achievement */
+.achievement.unlocked .achievement-title {
+    color: var(--secondary-color);
+    animation: textGlow 1.5s infinite alternate;
+}
+
+@keyframes textGlow {
+    from { text-shadow: 0 0 2px rgba(var(--secondary-color), 0.3); }
+    to { text-shadow: 0 0 5px rgba(var(--secondary-color), 0.6); }
+}
+
+/* Celebration particle animation */
+.celebration-particle {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    opacity: 0;
+    z-index: -1;
+    pointer-events: none;
+    animation: particleExplode 1s ease-out forwards;
+}
+
+@keyframes particleExplode {
+    0% {
+        transform: translate(0, 0);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(calc(cos(var(--angle)) * var(--distance)), 
+                           calc(sin(var(--angle)) * var(--distance)));
+        opacity: 0;
+    }
+}
