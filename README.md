@@ -1,1 +1,1 @@
-kidcalc =[]
+kidcalc =[https://d3mio.github.io/Calculator/]
