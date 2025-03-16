@@ -422,3 +422,25 @@ document.addEventListener('DOMContentLoaded', function() {
         unlockAchievement('First Calculation');
     }, 5000);
 });
+
+// Example JavaScript to activate modal animations
+document.getElementById('achievements-button').addEventListener('click', function() {
+    const modal = document.getElementById('achievements-modal');
+    modal.style.display = 'block';
+    setTimeout(() => modal.classList.add('active'), 10);
+});
+
+document.getElementById('settings-button').addEventListener('click', function() {
+    const modal = document.getElementById('settings-modal');
+    modal.style.display = 'block';
+    setTimeout(() => modal.classList.add('active'), 10);
+});
+
+// Close modal and handle animations
+document.querySelectorAll('.close-modal').forEach(button => {
+    button.addEventListener('click', function() {
+        const modal = this.closest('.modal');
+        modal.classList.remove('active');
+        setTimeout(() => modal.style.display = 'none', 400);
+    });
+});

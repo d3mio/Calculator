@@ -585,4 +585,407 @@ header {
     color: var(--text-color);
 }
 
-.game-
+.game-input input:focus {
+    outline: none;
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 0 2px rgba(255, 140, 0, 0.2);
+}
+
+.game-buttons {
+    display: flex;
+    gap: 12px;
+}
+
+
+/* Modal styling with animations */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 100;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    overflow: auto;
+    opacity: 0;
+    transition: opacity 0.4s ease-in-out;
+}
+
+.modal.active {
+    display: block;
+    opacity: 1;
+    animation: modalFadeIn 0.5s forwards;
+}
+
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.modal-content {
+    position: relative;
+    background: linear-gradient(145deg, var(--bg-color), #f8f9fb);
+    margin: 8% auto;
+    padding: 30px;
+    width: 85%;
+    max-width: 520px;
+    border-radius: 20px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+    transform: scale(0.9);
+    opacity: 0;
+    animation: contentPop 0.6s 0.2s forwards;
+}
+
+@keyframes contentPop {
+    0% {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+    70% {
+        transform: scale(1.03);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.modal-content h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: var(--primary-color);
+    font-size: 2rem;
+    letter-spacing: 0.5px;
+    position: relative;
+}
+
+.modal-content h2:after {
+    content: '';
+    position: absolute;
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 4px;
+}
+
+.close-modal {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 28px;
+    color: #888;
+    cursor: pointer;
+    transition: all 0.3s;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+.close-modal:hover {
+    color: var(--primary-color);
+    background-color: rgba(0, 0, 0, 0.05);
+    transform: rotate(90deg);
+}
+
+/* Achievement styling */
+.achievements-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.achievement {
+    display: flex;
+    align-items: center;
+    padding: 18px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateX(-20px);
+}
+
+.achievements-list .achievement:nth-child(1) {
+    animation: slideIn 0.4s 0.5s forwards;
+}
+
+.achievements-list .achievement:nth-child(2) {
+    animation: slideIn 0.4s 0.7s forwards;
+}
+
+.achievements-list .achievement:nth-child(3) {
+    animation: slideIn 0.4s 0.9s forwards;
+}
+
+@keyframes slideIn {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.achievement:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(to bottom, var(--primary-color), var(--secondary-color));
+    border-radius: 4px 0 0 4px;
+}
+
+.achievement:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.achievement.locked {
+    filter: grayscale(1);
+    opacity: 0.7;
+}
+
+.achievement.locked:hover {
+    filter: grayscale(0.5);
+}
+
+.achievement-icon {
+    font-size: 28px;
+    margin-right: 15px;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #f8f9fb, #e6eaef);
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.achievement-details {
+    flex-grow: 1;
+}
+
+.achievement-title {
+    font-weight: 600;
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+    color: var(--text-color);
+}
+
+.achievement-description {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+/* Settings styling */
+.settings-options {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.setting {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 20px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
+    transition: all 0.3s ease;
+    opacity: 0;
+    transform: translateY(15px);
+}
+
+.settings-options .setting:nth-child(1) {
+    animation: settingFadeIn 0.4s 0.4s forwards;
+}
+
+.settings-options .setting:nth-child(2) {
+    animation: settingFadeIn 0.4s 0.6s forwards;
+}
+
+.settings-options .setting:nth-child(3) {
+    animation: settingFadeIn 0.4s 0.8s forwards;
+}
+
+@keyframes settingFadeIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.setting:hover {
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+}
+
+.setting label {
+    font-weight: 500;
+    color: var(--text-color);
+}
+
+/* Toggle switch styling */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+input:checked + .slider {
+    background-color: var(--primary-color);
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px var(--primary-color);
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+/* Select dropdown styling */
+select {
+    appearance: none;
+    padding: 10px 15px;
+    width: 200px;
+    font-size: 1rem;
+    border: 2px solid #e1e5eb;
+    border-radius: 8px;
+    background-color: white;
+    color: var(--text-color);
+    cursor: pointer;
+    transition: all 0.3s;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23333333' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 16px;
+}
+
+select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(var(--primary-color-rgb), 0.2);
+}
+
+select:hover {
+    border-color: var(--primary-color);
+}
+
+/* Footer styling */
+footer {
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    background: linear-gradient(to right, var(--bg-color), rgba(var(--primary-color-rgb), 0.05));
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.achievement-badge, .settings-button {
+    padding: 10px 16px;
+    background: white;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s;
+}
+
+.achievement-badge:hover, .settings-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.12);
+    background: linear-gradient(45deg, #ffffff, #f8f9fb);
+}
+
+.achievement-badge span:first-child, .settings-button span:first-child {
+    font-size: 1.2rem;
+}
+
+/* Animation for achievement unlocking */
+@keyframes achievementUnlock {
+    0% {
+        transform: scale(1);
+    }
+    10% {
+        transform: scale(1.1);
+    }
+    20% {
+        transform: scale(1);
+    }
+    30% {
+        transform: scale(1.05);
+    }
+    40% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.achievement-unlocked {
+    animation: achievementUnlock 1s ease-in-out, glowing 2s infinite alternate;
+}
+
+@keyframes glowing {
+    from {
+        box-shadow: 0 0 5px 2px rgba(var(--primary-color-rgb), 0.5);
+    }
+    to {
+        box-shadow: 0 0 15px 5px rgba(var(--primary-color-rgb), 0.8);
+    }
+}
