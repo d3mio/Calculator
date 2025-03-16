@@ -54,6 +54,11 @@ document.addEventListener('DOMContentLoaded', function() {
             button.classList.add('selected');
             state.selectedAnimal = button.dataset.animal;
             updateVisualRepresentation();
+            
+            // Also update result visualization if there's a result
+            if (state.result !== null) {
+                updateResultVisualization();
+            }
         });
     });
 
@@ -77,14 +82,32 @@ document.addEventListener('DOMContentLoaded', function() {
             if (state.result === null) {
                 state.result = number;
                 document.getElementById('result').textContent = number;
+                updateResultVisualization(); // Update visual representation in real-time
                 checkAnswer();
             } else {
                 state.result = parseInt(state.result.toString() + number.toString());
                 document.getElementById('result').textContent = state.result;
+                updateResultVisualization(); // Update visual representation in real-time
                 checkAnswer();
             }
         });
     });
+
+    // Function to update result visualization
+    function updateResultVisualization() {
+        const resultContainer = document.getElementById('result-objects');
+        resultContainer.innerHTML = '';
+        
+        // Create result objects based on the current result
+        if (state.result !== null) {
+            for (let i = 0; i < state.result; i++) {
+                const obj = document.createElement('div');
+                obj.className = 'object';
+                obj.textContent = state.selectedAnimal;
+                resultContainer.appendChild(obj);
+            }
+        }
+    }
 
     // Calculate button
     calculateButton.addEventListener('click', checkAnswer);
@@ -174,6 +197,9 @@ document.addEventListener('DOMContentLoaded', function() {
         
         updateProblemDisplay();
         updateVisualRepresentation();
+        
+        // Clear result visualization
+        document.getElementById('result-objects').innerHTML = '';
     }
 
     function updateProblemDisplay() {
@@ -190,11 +216,9 @@ document.addEventListener('DOMContentLoaded', function() {
     function updateVisualRepresentation() {
         const firstNumberContainer = document.getElementById('first-number-objects');
         const secondNumberContainer = document.getElementById('second-number-objects');
-        const resultContainer = document.getElementById('result-objects');
         
         firstNumberContainer.innerHTML = '';
         secondNumberContainer.innerHTML = '';
-        resultContainer.innerHTML = '';
         
         // Create objects for first number
         for (let i = 0; i < state.firstNumber; i++) {
@@ -210,16 +234,6 @@ document.addEventListener('DOMContentLoaded', function() {
             obj.className = 'object';
             obj.textContent = state.selectedAnimal;
             secondNumberContainer.appendChild(obj);
-        }
-        
-        // Create result objects if there's a result
-        if (state.result !== null) {
-            for (let i = 0; i < state.result; i++) {
-                const obj = document.createElement('div');
-                obj.className = 'object';
-                obj.textContent = state.selectedAnimal;
-                resultContainer.appendChild(obj);
-            }
         }
     }
 
